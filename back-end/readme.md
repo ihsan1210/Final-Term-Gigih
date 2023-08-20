@@ -19,12 +19,14 @@ Database name is tokplay and have 2 collections, videos and comments.
   {
     videoId: string
     urlThumbnail: string
+    urlVideo: string
     product : [
       {
-        productId:  string
-        price:  number
-        productName:  string
-        linkProduct:  string
+        productThumbnail : string
+        productId: string
+        price: number
+        productName: string
+        linkProduct: string
       }
     ]
   }
@@ -41,14 +43,14 @@ Database name is tokplay and have 2 collections, videos and comments.
 ```
 
 ## API Structure
-
+Backend deploy in railway, that can acces in this link: (https://final-term-backend.up.railway.app/)
 Endpoint ready to use
 
 ```
 GET   /video
-GET   /video/listProduk
+GET   /video/listProduk/:id
 GET   /video/:id
-GET   /comment/list
+GET   /comment/list/:id
 POST  /comment/post
 ```
 
@@ -66,8 +68,10 @@ Return all videos JSON from database
     {
       videoId,
       urlThumbnail,
+      urlVideo: string
       product : [
         {
+          productThumbnail : string
           productId,
           productName,
           linkProduct,
@@ -79,18 +83,19 @@ Return all videos JSON from database
 }
 ```
 
-### GET /video/listProduk
+### GET /video/listProduk/:id
 
 ---
 
-Return List Product in Video Database
+Return List Product in Video Database from the specified video Id
 
 ```
 {
   result : [
     [
       {
-      productId:,
+      productId,
+      productThumbnail
       productName,
       linkProduct,
       price
@@ -115,6 +120,7 @@ Find videos from the specified id.
       product : [
         {
           productId,
+          productThumbnail
      	    productName,
           price,
           linkProduct
@@ -125,11 +131,11 @@ Find videos from the specified id.
 }
 ```
 
-### GET /comment/list
+### GET /comment/list/:id
 
 ---
 
-Get all comment from databases.
+Get all comment from databases with specified video id.
 
 ```
 {
@@ -143,11 +149,11 @@ Get all comment from databases.
 }
 ```
 
-### POST /comment/post
+### POST /comment/post/:id
 
 ---
 
-POST / Creates a new Comment and insert to databases.
+POST / Creates a new Comment and insert to databases with specified video Id.
 
 ```
 {
